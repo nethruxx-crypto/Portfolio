@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nethra A | Resume</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0b1120;
+            color: #e5e7eb;
+            line-height: 1.6;
+            padding: 24px 12px;
+        }
+
+        .resume-page {
+            max-width: 960px;
+            margin: 0 auto;
+            background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.9);
+            padding: 28px 28px 32px;
+        }
+
+        .resume-top {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 1.5fr);
+            gap: 24px;
+            align-items: center;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+        }
+
+        .resume-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #f9fafb;
+        }
+
+        .resume-name span {
+            background: linear-gradient(120deg, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .resume-role {
+            font-size: 15px;
+            color: #cbd5f5;
+            margin-top: 4px;
+        }
+
+        .resume-summary {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #9ca3af;
+            max-width: 520px;
+        }
+
+        .resume-contact {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-top: 10px;
+        }
+
+        .resume-contact a {
+            color: #e5e7eb;
+            text-decoration: none;
+        }
+
+        .resume-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .resume-photo-wrap {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .resume-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid rgba(148, 163, 184, 0.7);
+            object-fit: cover;
+            object-position: center;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+            display: block;
+        }
+
+        .resume-section {
+            margin-bottom: 18px;
+        }
+
+        .resume-section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .resume-grid-2 {
+            display: grid;
+            grid-template-columns: minmax(0, 2.3fr) minmax(0, 2fr);
+            gap: 20px;
+        }
+
+        .resume-item-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #f9fafb;
+        }
+
+        .resume-item-sub {
+            font-size: 13px;
+            color: #cbd5f5;
+        }
+
+        .resume-item-meta {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .resume-list {
+            margin-top: 6px;
+            padding-left: 16px;
+            font-size: 13px;
+            color: #e5e7eb;
+        }
+
+        .resume-list li+li {
+            margin-top: 3px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.55);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .resume-footer-note {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        @media (max-width: 800px) {
+            .resume-top {
+                grid-template-columns: minmax(0, 1fr);
+                text-align: left;
+            }
+
+            .resume-photo-wrap {
+                justify-content: flex-start;
+            }
+
+            .resume-page {
+                padding: 20px 18px 24px;
+            }
+
+            .resume-grid-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume-page">
+        <!-- Top section: name + photo -->
+        <div class="resume-top">
+            <div>
+                <h1 class="resume-name">Nethra <span>A</span></h1>
+                <p class="resume-role">B.Tech CSE (Artificial Intelligence) Student</p>
+                <p class="resume-summary">
+                    First-year CSE (AI) student at Amrita Vishwa Vidyapeetham (Amritapuri campus) with
+                    growing experience in AI agents, quantum computing basics, and web development.
+                    Interested in building real-world projects that combine problem-solving, clean
+                    interfaces, and intelligent systems.
+                </p>
+                <div class="resume-contact">
+                    <div>Chennai, Tamil Nadu, India</div>
+                    <div>Email: <a href="mailto:nethruxx@gmail.com">nethruxx@gmail.com</a></div>
+                    <div>Phone: <a href="tel:+919363969066">+91 93639 69066</a></div>
+                    <div>
+                        Portfolio: <a href="index.html" target="_blank">nethra-portfolio</a> |
+                        GitHub: <a href="https://github.com/nethruxx-crypto"
+                            target="_blank">github.com/nethruxx-crypto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-photo-wrap">
+                <!-- Make sure profile.jpg is in the same folder -->
+                <img src="profile.jpeg" alt="Profile photo of Nethra" class="resume-photo" />
+            </div>
+        </div>
+
+        <!-- Education + Skills -->
+        <div class="resume-section resume-grid-2">
+            <div>
+                <h2>Education</h2>
+                <div class="resume-item-title">B.Tech in Computer Science and Engineering (AI)</div>
+                <div class="resume-item-sub">Amrita Vishwa Vidyapeetham, Amritapuri Campus</div>
+                <div class="resume-item-meta">2025 – 2029 (Expected)</div>
+            </div>
+            <div>
+                <h2>Core Skills</h2>
+                <div class="pill-row">
+                    <span class="pill">C</span>
+                    <span class="pill">Java</span>
+                    <span class="pill">HTML</span>
+                    <span class="pill">CSS</span>
+                    <span class="pill">Git & GitHub</span>
+                    <span class="pill">Prompt Engineering</span>
+                    <span class="pill">AI Agents (basic)</span>
+                    <span class="pill">Qiskit (intro)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="resume-section">
+            <h2>Projects</h2>
+
+            <div class="resume-item-title">Deutsch–Jozsa Algorithm (Qiskit)</div>
+            <div class="resume-item-sub">Personal project • GitHub: DJ-Algo</div>
+            <div class="resume-item-meta">Tech: Python, Qiskit, quantum circuits</div>
+            <ul class="resume-list">
+                <li>Implemented the Deutsch–Jozsa algorithm using Qiskit to understand quantum circuits and
+                    superposition.</li>
+                <li>Explored how quantum algorithms distinguish between balanced and constant functions with very few
+                    oracle calls.</li>
+            </ul>
+
+            <div class="resume-item-title" style="margin-top: 10px;">Negotiator_AI</div>
+            <div class="resume-item-sub">Personal project • AI negotiation agent</div>
+            <div class="resume-item-meta">Tech: Python, basic agent logic</div>
+            <ul class="resume-list">
+                <li>Simulated negotiation between agents, focusing on offer adjustments and responding to
+                    counter-offers.</li>
+                <li>Practiced designing simple strategies for moving toward a mutually acceptable agreement.</li>
+            </ul>
+
+            <div class="resume-item-title" style="margin-top: 10px;">mediAgent</div>
+            <div class="resume-item-sub">Personal project • Healthcare-inspired AI agent</div>
+            <div class="resume-item-meta">Tech: Python, multi-agent concepts</div>
+            <ul class="resume-list">
+                <li>Explored how AI agents could assist with basic healthcare-related workflows such as triage and
+                    routing ideas.</li>
+                <li>Focused on structuring information flow between agents in a medical support context.</li>
+            </ul>
+
+            <div class="resume-item-title" style="margin-top: 10px;">Generative AI Agent (NxtWave)</div>
+            <div class="resume-item-sub">Workshop project • NxtWave</div>
+            <div class="resume-item-meta">Tech: Python, OpenAI GPT, Hugging Face</div>
+            <ul class="resume-list">
+                <li>Built a Generative AI agent using GPT models, connecting an API-based model to a simple application
+                    flow.</li>
+                <li>Learned prompt design, handling model responses, and deploying via platforms like Hugging Face.</li>
+            </ul>
+        </div>
+
+        <!-- Experiences -->
+        <div class="resume-section">
+            <h2>Experiences</h2>
+
+            <div class="resume-item-title">Inclusive Education Ideathon</div>
+            <div class="resume-item-meta">Student Participant</div>
+            <ul class="resume-list">
+                <li>Co-presented solutions to enhance accessibility and participation for students with differing
+                    abilities.</li>
+                <li>Focused on how technology and AI can create more inclusive, supportive learning environments.</li>
+                <li>Prepared a structured presentation outlining scalable, realistic implementation ideas.</li>
+            </ul>
+
+            <div class="resume-item-title" style="margin-top: 10px;">Hacktoberfest 2025</div>
+            <div class="resume-item-meta">Open Source Contributor</div>
+            <ul class="resume-list">
+                <li>Participated in Hacktoberfest 2025, contributing to beginner-friendly repositories.</li>
+                <li>Completed tasks around learning Git, making first issues and pull requests, and working on projects
+                    such as Amplace and Faction Turf.</li>
+                <li>Gained confidence with version control, collaboration workflows, and reading other developers’ code.
+                </li>
+            </ul>
+        </div>
+
+        <!-- Additional -->
+        <div class="resume-section resume-grid-2">
+            <div>
+                <h2>Interests</h2>
+                <ul class="resume-list">
+                    <li>Artificial Intelligence and AI engineering.</li>
+                    <li>Web and app development.</li>
+                    <li>Game development fundamentals.</li>
+                    <li>Multi-agent systems and automation.</li>
+                </ul>
+            </div>
+            <div>
+                <h2>Activities</h2>
+                <ul class="resume-list">
+                    <li>Volunteer at events such as Amritavarsham-72’ refreshment seva.</li>
+                    <li>Cleanup drives and other public-service activities.</li>
+                    <li>Active participation in technical workshops and student events.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-footer-note">
+            Resume generated as HTML/CSS • Updated 2026
+        </div>
+    </div>
+</body>
+
+</html>

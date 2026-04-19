@@ -1,1 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Nethra | Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheet -->
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #020205;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --border: #151525;
+    --accent: #ffffff;
+
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: transparent;
+
+/* Film Grain / Noise Overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    z-index: 9999;
+    pointer-events: none;
+    animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, -10%);
+    }
+
+    20% {
+        transform: translate(-15%, 5%);
+    }
+
+    30% {
+        transform: translate(7%, -25%);
+    }
+
+    40% {
+        transform: translate(-5%, 25%);
+    }
+
+    50% {
+        transform: translate(-15%, 10%);
+    }
+
+    60% {
+        transform: translate(15%, 0%);
+    }
+
+    70% {
+        transform: translate(0%, 15%);
+    }
+
+    80% {
+        transform: translate(3%, 35%);
+    }
+
+    90% {
+        transform: translate(-10%, 10%);
+    }
+}
+
+/* Inverted Custom Cursor */
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    opacity: 1;
+}
+
+.cursor.hover-grow {
+    width: 80px;
+    height: 80px;
+}
+
+/* Background Canvas */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 1;
+    /* Managed in JS */
+}
+
+/* Hide Orbs */
+.page-bg-orbs {
+    display: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, .nav-logo {
+    color: #ffffff !important;
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+
+.accent {
+    color: var(--text-muted);
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    mix-blend-mode: difference;
+    transition: var(--transition);
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.nav-logo span {
+    color: var(--text-muted);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--text-main);
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a:hover::after {
+    transform: translateX(0);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+}
+
+.hero-text {
+    max-width: 1000px;
+    z-index: 2;
+}
+
+.hero-tag {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.hero h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--text-main);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-body);
+    max-width: 600px;
+}
+
+.hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    max-width: 500px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.magnetic-btn-wrap {
+    display: inline-block;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 3rem;
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s, background 0.3s, border 0.3s;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn.primary {
+    background: var(--text-main);
+    color: var(--bg);
+    border: 1px solid var(--text-main);
+}
+
+.btn.primary:hover {
+    background: transparent;
+    color: var(--text-main);
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+.btn.ghost:hover {
+    border-color: var(--text-main);
+}
+
+.hero-card {
+    padding: 2rem;
+    border-left: 2px solid var(--border);
+}
+
+/* Sections */
+.section {
+    padding: 10rem 5%;
+    border-top: 1px solid var(--border);
+}
+
+.section-alt {
+    background: transparent;
+}
+
+.section-header {
+    margin-bottom: 6rem;
+}
+
+.section-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+}
+
+/* About Grid */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.about-text p {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.about-meta ul {
+    list-style: none;
+}
+
+.about-meta li {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.about-meta span {
+    color: var(--text-main);
+    width: 150px;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.skills-group {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.skills-group h3 {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.chip {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.chip:hover {
+    border-color: var(--text-main);
+    color: var(--text-main);
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.project-card {
+    padding: 4rem 0;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+    align-items: center;
+}
+
+.project-card:hover {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.project-card h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.project-card:hover h3 {
+    opacity: 0.5;
+}
+
+.project-card p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.project-tag {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.project-meta {
+    font-size: 0.9rem;
+    color: var(--text-main) !important;
+    text-align: right;
+}
+
+.project-card .btn {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* Resume/Experiences */
+.resume-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.resume-grid>div {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    transition: var(--transition);
+}
+
+.resume-grid>div:hover {
+    padding-left: 2rem;
+}
+
+.resume-grid h3 {
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.resume-grid p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Contact */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-details p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.contact-icon {
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.contact-details span:nth-child(2) {
+    color: var(--text-muted);
+    margin-right: 2rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 80px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    transition: var(--transition);
+    border-radius: 0;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-bottom-color: var(--text-main);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+}
+
+/* Scroll Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Twist & Fall Text Animation */
+.letter-wrap {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+h1, h2, h3, h4 { opacity: 1 !important; visibility: visible !important; color: white !important; }
+
+
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) rotateZ(0);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .resume-grid>div {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-meta {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .about-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 10rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .section-header h2 {
+        font-size: 3rem;
+    }
+}
+/* Ultimate Space Background */
+#space-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #0a0a20 0%, #020205 100%);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+        /* Final Color Fixes */
+        .hero-card, .hero-card *, .hero-label, .hero-role, .hero-meta {
+            color: #ffffff !important;
+        }
+        .contact-details a {
+            color: #ffffff !important;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+        .contact-details a:hover {
+            border-bottom-color: #ffffff;
+            opacity: 0.8;
+        }
+
+    
+        /* Shooting Star Effect */
+        .shooting-star {
+            position: absolute;
+            top: 0; right: 0;
+            width: 150px; height: 1.5px;
+            background: linear-gradient(90deg, #fff, transparent);
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(-15deg);
+        }
+        @keyframes shoot {
+            0% { transform: translate(0, 0) rotate(-15deg); opacity: 1; width: 0; }
+            30% { width: 200px; opacity: 1; }
+            100% { transform: translate(-120vw, 50vh) rotate(-15deg); opacity: 0; width: 0; }
+        }
+
+    
+        /* Letter-by-letter fall animation */
+        .letter-wrap {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: letterFall 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes letterFall {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="space-bg"></div>
+    
+    
+    <!-- Glowing background orbs -->
+    <div class="page-bg-orbs"></div>
+
+    <!-- Top Navigation -->
+    <header class="navbar">
+        <div class="nav-logo">Nethra<span>.</span></div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <p class="hero-tag">CSE (AI) • 2025–2029 • Amrita</p>
+            <h1>Hi, I'm <span class="accent">Nethra</span>.</h1>
+            <h2>Aspiring AI Engineer & Developer</h2>
+            <p class="hero-sub">
+                I enjoy building real-world projects in AI, programming, and web development,
+                and I’m curious about game development and emerging technologies.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary">View Projects</a>
+                <a href="resume.html" class="btn ghost" target="_blank">View Resume</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <div class="hero-label">Currently</div>
+            <p class="hero-role">B.Tech CSE-AI Student</p>
+            <p class="hero-meta">Amrita Vishwa Vidyapeetham, Amritapuri Campus</p>
+            <p class="hero-meta">Based in Chennai, Tamil Nadu, India</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p>Who I am and what I care about.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    I am a Computer Science Engineering student specializing in Artificial Intelligence.
+                    I enjoy solving problems, learning new technologies, and building projects that connect
+                    theory with real-world impact.
+                </p>
+                <p>
+                    My current interests include AI engineering, app and web development, and exploring
+                    the basics of game development. I like understanding how systems work end-to-end,
+                    from clean user interfaces to the intelligence behind them.
+                </p>
+            </div>
+            <div class="about-meta">
+                <ul>
+                    <li><span>Degree:</span> B.Tech CSE (AI)</li>
+                    <li><span>University:</span> Amrita Vishwa Vidyapeetham</li>
+                    <li><span>Campus:</span> Amritapuri, Kerala</li>
+                    <li><span>Batch:</span> 2025 – 2029</li>
+                    <li><span>Goal:</span> AI Engineer</li>
+                    <li><span>Location:</span> Chennai, Tamil Nadu</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-alt">
+        <div class="section-header">
+            <h2>Skills</h2>
+            <p>Technologies and tools I’ve worked with.</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skills-group">
+                <h3>Programming Languages</h3>
+                <div class="chip-row">
+                    <span class="chip">C</span>
+                    <span class="chip">Java</span>
+                    <span class="chip">HTML</span>
+                    <span class="chip">CSS</span>
+                    <span class="chip">Python</span>
+                </div>
+            </div>
+            <div class="skills-group">
+                <h3>Tools & Platforms</h3>
+                <div class="chip-row">
+                    <span class="chip">Git</span>
+                    <span class="chip">GitHub</span>
+                    <span class="chip">Hugging Face</span>
+                    <span class="chip">IBM Qiskit</span>
+                    <span class="chip">OpenAI APIs</span>
+                </div>
+            </div>
+            <div class="skills-group">
+                <h3>Interests</h3>
+                <div class="chip-row">
+                    <span class="chip">AI Engineering</span>
+                    <span class="chip">Web Development</span>
+                    <span class="chip">App Development</span>
+                    <span class="chip">Game Development</span>
+                    <span class="chip">Multi-Agent Systems</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-header">
+            <h2>Projects & Highlights</h2>
+            <p>GitHub projects and AI experiments that reflect my current learning.</p>
+        </div>
+        <div class="projects-grid">
+
+            <!-- Project 1: DJ-Algo (Qiskit) -->
+            <article class="project-card">
+                <div class="project-tag">GitHub • Qiskit</div>
+                <h3>Deutsch–Jozsa Algorithm (Qiskit)</h3>
+                <p>
+                    Implemented the Deutsch–Jozsa algorithm using Qiskit to explore quantum circuits,
+                    superposition, and how quantum algorithms can distinguish balanced and constant
+                    functions with very few oracle calls.
+                </p>
+                <p class="project-meta">
+                    Tech: Python, Qiskit, quantum circuits, IBM Quantum tools.
+                </p>
+                <a href="https://github.com/nethruxx-crypto/DJ-Algo" class="btn ghost" target="_blank"
+                    rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+            </article>
+
+            <!-- Project 2: Negotiator_AI -->
+            <article class="project-card">
+                <div class="project-tag">GitHub • AI Agent</div>
+                <h3>Negotiator_AI</h3>
+                <p>
+                    A negotiation-focused AI agent that simulates automated bargaining between parties.
+                    The project explores how agents can adjust offers, respond to counter-offers, and
+                    move toward an agreement using simple strategies.
+                </p>
+                <p class="project-meta">
+                    Tech: Python (or relevant stack), basic agent logic, decision-making strategies.
+                </p>
+                <a href="https://github.com/nethruxx-crypto/Negotiator_Ai" class="btn ghost" target="_blank"
+                    rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+            </article>
+
+            <!-- Project 3: mediAgent -->
+            <article class="project-card">
+                <div class="project-tag">GitHub • Multi-Agent</div>
+                <h3>mediAgent</h3>
+                <p>
+                    A medical-themed AI agent project inspired by multi-agent healthcare assistants.
+                    It focuses on how agents can coordinate around patient or case information and
+                    support tasks such as triage, routing, or basic information handling.
+                </p>
+                <p class="project-meta">
+                    Tech: Python (or relevant stack), AI agents, healthcare-inspired workflow ideas.
+                </p>
+                <a href="https://github.com/nethruxx-crypto/mediAgent" class="btn ghost" target="_blank"
+                    rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+            </article>
+
+            <!-- Project 4: Generative AI Agent (NxtWave) -->
+            <article class="project-card">
+                <div class="project-tag">Workshop • Generative AI</div>
+                <h3>Generative AI Agent (NxtWave)</h3>
+                <p>
+                    Built a Generative AI agent during a NxtWave workshop using Python and OpenAI GPT
+                    models, deployed via Hugging Face. The project taught me prompt design, API usage,
+                    and how to connect a language model to a simple application flow.
+                </p>
+                <p class="project-meta">
+                    Tech: Python, OpenAI GPT, Hugging Face, prompt engineering.
+                </p>
+                <a href="#" class="btn ghost" target="_blank" rel="noopener noreferrer">
+                    View Project (coming soon)
+                </a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experiences" class="section section-alt">
+        <div class="section-header">
+            <h2>Experiences</h2>
+            <p>Events and programs that helped me grow beyond the classroom.</p>
+        </div>
+
+        <div class="resume-grid">
+            <!-- Experience 1: Ideathon -->
+            <div>
+                <h3>Inclusive Education Ideathon</h3>
+                <p>
+                    Participated in an ideathon focused on enhancing accessibility and participation
+                    for students with differing abilities. Our team presented scalable solutions that
+                    used technology and AI to create more inclusive and supportive learning environments.
+                </p>
+                <p class="project-meta">
+                    Focus: accessibility, inclusive design, AI for education, student engagement.
+                </p>
+                <p style="margin-top: 8px;">
+                    <a href="ideathon.pdf" target="_blank" rel="noopener noreferrer" class="btn ghost">
+                        View Presentation (PPT)
+                    </a>
+                </p>
+            </div>
+
+            <!-- Experience 2: Hacktoberfest 2025 -->
+            <div>
+                <h3>Hacktoberfest 2025</h3>
+                <p>
+                    Took part in Hacktoberfest 2025, contributing to beginner-friendly open source
+                    repositories. Through tasks like learning Git, making my first issues and pull
+                    requests, and working on projects such as Amplace and Faction Turf, I gained
+                    practical experience with real-world collaboration and version control.
+                </p>
+                <p class="project-meta">
+                    Focus: Git & GitHub basics, open source workflows, first issues, collaborative coding.
+                </p>
+                <p style="margin-top: 8px;">
+                    <a href="https://hacktoberfest.com" target="_blank" rel="noopener noreferrer" class="btn ghost">
+                        Learn about Hacktoberfest
+                    </a>
+                </p>
+            </div>
+
+            <!-- Extra box -->
+            <div>
+                <h3>Volunteer & Campus Activities</h3>
+                <p>
+                    In addition to technical events, I take part in volunteer activities such as
+                    Amritavarsham-72’ refreshment seva and cleanup drives, which help me stay grounded
+                    and improve my teamwork and communication skills.
+                </p>
+                <p class="project-meta">
+                    Focus: teamwork, service mindset, communication.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <h2>Contact</h2>
+            <p>Feel free to reach out for opportunities, collaborations, or questions.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-details">
+                <p>
+                    <span class="contact-icon">📧</span>
+                    <span>Email:</span>
+                    <a href="mailto:nethruxx@gmail.com">nethruxx@gmail.com</a>
+                </p>
+                <p>
+                    <span class="contact-icon">📱</span>
+                    <span>Phone:</span>
+                    <a href="tel:+919363969066">+91 93639 69066</a>
+                </p>
+                <p>
+                    <span class="contact-icon">📍</span>
+                    <span>Location:</span>
+                    Chennai, Tamil Nadu, India
+                </p>
+                <p>
+                    <span class="contact-icon">🔗</span>
+                    <span>LinkedIn:</span>
+                    <a href="https://www.linkedin.com/in/a-nethra-7897a4391/" target="_blank" rel="noopener noreferrer">
+                        linkedin.com/in/a-nethra-7897a4391/
+                    </a>
+                </p>
+                <p>
+                    <span class="contact-icon">🐙</span>
+                    <span>GitHub:</span>
+                    <a href="https://github.com/nethruxx-crypto" target="_blank" rel="noopener noreferrer">
+                        github.com/nethruxx-crypto
+                    </a>
+                </p>
+            </div>
+
+            <form class="contact-form" onsubmit="sendMail(event)">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea rows="4" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn primary full">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Nethra A • Portfolio</p>
+    </footer>
+    <script>
+    console.log("Perfect Merge Loaded.");
+
+    // --- 1. Custom Cursor ---
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    document.querySelectorAll('a, button, .project-card, .btn').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover-grow'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover-grow'));
+    });
+
+    // --- 2. Dynamic Space Background ---
+    const space = document.getElementById('space-bg') || document.createElement('div');
+    if (!space.parentElement) {
+        space.id = 'space-bg';
+        document.body.insertBefore(space, document.body.firstChild);
+    }
+    space.innerHTML = '';
+    for (let i = 0; i < 150; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 0.5;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        star.style.opacity = Math.random();
+        space.appendChild(star);
+    }
+
+    // --- 3. Intersection Observer for Reveal ---
+    const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, index * 50);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealOnScroll.observe(el));
+
+    // --- 4. Hero Animation ---
+    const hero = document.querySelector(".hero");
+    if(hero) hero.classList.add("active");
+
+    // --- 5. Shooting Star Trigger ---
+    function createShootingStar() {
+        const space = document.getElementById('space-bg');
+        if(!space) return;
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        star.style.top = Math.random() * 30 + '%';
+        star.style.right = '-10%';
+        star.style.animation = `shoot ${2 + Math.random() * 2}s linear`;
+        space.appendChild(star);
+        setTimeout(() => star.remove(), 4000);
+    }
+    // Random interval for shooting stars
+    setInterval(() => {
+        if (Math.random() > 0.7) createShootingStar();
+    }, 3000);
+
+    
+    // --- 6. Letter Fall Animation ---
+    const heroTitle = document.querySelector('.hero h1');
+    if(heroTitle) {
+        const text = heroTitle.innerText;
+        heroTitle.innerHTML = '';
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.className = 'letter-wrap';
+            const letter = document.createElement('span');
+            letter.className = 'letter';
+            letter.textContent = char === ' ' ? '\u00A0' : char;
+            letter.style.animationDelay = `${i * 0.05}s`;
+            span.appendChild(letter);
+            heroTitle.appendChild(span);
+        });
+    }
+
+    
+    function sendMail(e) {
+        e.preventDefault();
+        const name = document.querySelector('input[name="name"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const message = document.querySelector('textarea[name="message"]').value;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+        window.location.href = `mailto:nethruxx@gmail.com?subject=Portfolio Message from ${name}&body=${body}`;
+        alert('Opening your email app to send the message!');
+    }
+
+    </script>
+</body>
+
+</html>

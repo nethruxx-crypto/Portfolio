@@ -1,6 +1,6 @@
 # Nethra A – Portfolio
 
-This is my personal portfolio website built with pure HTML and CSS. It showcases my projects, experiences, and contact information as an aspiring AI Engineer and developer.
+This is my personal portfolio website built with pure HTML and CSS and JAVASCRIPT. It showcases my projects, experiences, and contact information as an aspiring AI Engineer and developer.
 
 ## 🔹 About
 
@@ -11,7 +11,7 @@ This is my personal portfolio website built with pure HTML and CSS. It showcases
 
 ## 🔹 Features
 
-- Modern blue-themed UI with subtle animations  
+- Modern space themed UI with subtle animations  
 - Separate sections for About, Skills, Projects, Experiences, and Contact  
 - Dedicated HTML resume page with profile photo  
 - Responsive layout for desktop and mobile screens  
